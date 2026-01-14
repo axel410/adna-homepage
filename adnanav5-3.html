@@ -264,16 +264,17 @@
                     <!-- HERO IMAGE SLIDER REPLACEMENT -->
                     <!-- Slider Column: Now spans 7 columns (approx 58%) for a wider, cinematic look -->
                     <!-- Updated to a more compact 16:9 ratio -->
-                    <div class="relative w-full aspect-[16/9] max-h-[520px] lg:max-h-[560px] group lg:col-span-7" id="hero-slider">
-                        <!-- Slider Container -->
-                        <div class="relative h-full w-full rounded-3xl overflow-hidden shadow-2xl bg-gray-100">
+                    <div class="relative w-full lg:col-span-7 flex flex-col items-center">
+                        <div class="relative w-full aspect-[16/9] max-h-[520px] lg:max-h-[560px] group" id="hero-slider">
+                            <!-- Slider Container -->
+                            <div class="relative h-full w-full rounded-3xl overflow-hidden shadow-2xl bg-gray-100">
                             
                             <!-- Slide 1: Popular tests -->
                             <div class="slider-slide active" data-index="0">
                                 <div class="absolute inset-0 bg-gradient-to-br from-adna-bg via-white to-adna-light/60"></div>
                                 <div class="relative h-full w-full p-0 sm:p-0 md:p-0 flex items-center">
-                                    <div class="w-full h-full rounded-none sm:rounded-3xl bg-white border border-adna-light/70 shadow-none px-6 py-6 sm:px-8 sm:py-6">
-                                        <div class="flex items-center justify-between pb-2">
+                                    <div class="w-full h-full rounded-none sm:rounded-3xl bg-white border border-adna-light/70 shadow-none px-6 py-5 sm:px-7 sm:py-5 flex flex-col overflow-hidden">
+                                        <div class="flex items-center justify-between pb-3">
                                             <div>
                                                 <p class="text-xs font-semibold uppercase tracking-[0.3em] text-adna-anchor/70">Sélection</p>
                                                 <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">Tests populaires</h3>
@@ -283,16 +284,16 @@
                                                 Top ventes
                                             </span>
                                         </div>
-                                        <div class="space-y-3">
+                                        <div class="space-y-2 flex-1 flex flex-col justify-between">
 
                                             <!-- Card -->
-                                            <a href="#" class="group flex items-center gap-4 rounded-2xl bg-white/85 border border-adna-light/70 shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-5">
-                                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-adna-light/60 flex items-center justify-center text-adna-anchor">
-                                                    <i class="fa-solid fa-compass text-xl"></i>
+                                            <a href="#" class="group flex items-center gap-4 rounded-2xl bg-white/85 border border-adna-light/70 shadow-sm hover:shadow-md transition-all duration-300 p-4">
+                                                <div class="w-12 h-12 rounded-2xl bg-adna-light/60 flex items-center justify-center text-adna-anchor">
+                                                    <i class="fa-solid fa-compass text-lg"></i>
                                                 </div>
                                                 <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-extrabold text-gray-900 tracking-wide uppercase">Curiosité</p>
-                                                    <p class="text-sm italic text-gray-500">Tranquillité d’esprit</p>
+                                                    <p class="text-sm font-extrabold text-gray-900 tracking-wide uppercase">Paternité</p>
+                                                    <p class="text-sm italic text-gray-500">Confirmation fiable des liens familiaux</p>
                                                 </div>
                                                 <div class="text-right">
                                                     <p class="text-lg font-extrabold text-adna-accent-text">199,00 $</p>
@@ -300,13 +301,13 @@
                                             </a>
 
                                             <!-- Card -->
-                                            <a href="#" class="group flex items-center gap-4 rounded-2xl bg-white/85 border border-adna-light/70 shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-5">
-                                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-adna-light/60 flex items-center justify-center text-adna-anchor">
-                                                    <i class="fa-solid fa-house text-xl"></i>
+                                            <a href="#" class="group flex items-center gap-4 rounded-2xl bg-white/85 border border-adna-light/70 shadow-sm hover:shadow-md transition-all duration-300 p-4">
+                                                <div class="w-12 h-12 rounded-2xl bg-adna-light/60 flex items-center justify-center text-adna-anchor">
+                                                    <i class="fa-solid fa-house text-lg"></i>
                                                 </div>
                                                 <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-extrabold text-gray-900 tracking-wide uppercase">Immigration</p>
-                                                    <p class="text-sm italic text-gray-500">Preuve biologique officielle</p>
+                                                    <p class="text-sm font-extrabold text-gray-900 tracking-wide uppercase">Généalogique</p>
+                                                    <p class="text-sm italic text-gray-500">Explorez votre ascendance et vos origines</p>
                                                 </div>
                                                 <div class="text-right">
                                                     <p class="text-lg font-extrabold text-adna-accent-text">499,00 $</p>
@@ -314,13 +315,13 @@
                                             </a>
 
                                             <!-- Card -->
-                                            <a href="#" class="group flex items-center gap-4 rounded-2xl bg-white/85 border border-adna-light/70 shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-5">
-                                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-adna-light/60 flex items-center justify-center text-adna-anchor">
-                                                    <i class="fa-solid fa-shield text-xl"></i>
+                                            <a href="#" class="group flex items-center gap-4 rounded-2xl bg-white/85 border border-adna-light/70 shadow-sm hover:shadow-md transition-all duration-300 p-4">
+                                                <div class="w-12 h-12 rounded-2xl bg-adna-light/60 flex items-center justify-center text-adna-anchor">
+                                                    <i class="fa-solid fa-shield text-lg"></i>
                                                 </div>
                                                 <div class="flex-1 min-w-0">
-                                                    <p class="text-sm font-extrabold text-gray-900 tracking-wide uppercase">Profil ADN</p>
-                                                    <p class="text-sm italic text-gray-500">Empreinte génétique unique</p>
+                                                    <p class="text-sm font-extrabold text-gray-900 tracking-wide uppercase">Nutrition</p>
+                                                    <p class="text-sm italic text-gray-500">Conseils personnalisés selon votre ADN</p>
                                                 </div>
                                                 <div class="text-right">
                                                     <p class="text-lg font-extrabold text-adna-accent-text">149,00 $</p>
@@ -390,25 +391,26 @@
                                 </div>
                             </div>
 
+                            </div>
                         </div>
 
                         <!-- Slider Controls -->
-                        <div class="absolute bottom-4 right-4 md:bottom-8 md:right-8 flex items-center space-x-3 z-30">
+                        <div class="flex items-center justify-center space-x-3 pt-4 opacity-70 hover:opacity-100 transition-opacity duration-300">
                             <!-- Prev Arrow -->
-                            <button id="slider-prev" class="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm border border-white/40 text-white flex items-center justify-center hover:bg-white hover:text-adna-anchor transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+                            <button id="slider-prev" class="w-10 h-10 rounded-full bg-adna-anchor text-white flex items-center justify-center hover:bg-adna-anchor/90 transition-all duration-300 shadow-md">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
 
                             <!-- Dots / Indicators -->
-                            <div class="flex space-x-2 bg-black/20 backdrop-blur-md rounded-full px-3 py-2">
-                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-colors" data-slide="0"></button>
-                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-colors" data-slide="1"></button>
-                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-colors" data-slide="2"></button>
-                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/50 hover:bg-white transition-colors" data-slide="3"></button>
+                            <div class="flex space-x-2 bg-adna-anchor/95 rounded-full px-4 py-2 shadow-md">
+                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="0"></button>
+                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="1"></button>
+                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="2"></button>
+                                <button class="slider-dot w-2.5 h-2.5 rounded-full bg-white/60 hover:bg-white transition-colors" data-slide="3"></button>
                             </div>
 
                             <!-- Next Arrow -->
-                            <button id="slider-next" class="w-10 h-10 rounded-full bg-white/30 backdrop-blur-sm border border-white/40 text-white flex items-center justify-center hover:bg-white hover:text-adna-anchor transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0">
+                            <button id="slider-next" class="w-10 h-10 rounded-full bg-adna-anchor text-white flex items-center justify-center hover:bg-adna-anchor/90 transition-all duration-300 shadow-md">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </div>
