@@ -183,6 +183,8 @@
             text-decoration: underline;
             text-decoration-thickness: 1px;
             text-underline-offset: 3px;
+            line-height: 1.05;
+            text-align: left;
             transition: color 200ms ease, text-decoration-color 200ms ease;
         }
         .contact-link:hover {
@@ -235,14 +237,16 @@
 
                 <!-- Right Actions -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <div class="flex flex-col items-center gap-1">
+                    <div class="flex items-center gap-2">
                         <a href="tel:514-233-5456" class="flex items-center space-x-2 group rounded-full bg-white/10 px-3 py-1.5 border border-adna-accent/60 shadow-sm shadow-adna-accent/10 hover:bg-adna-accent/15 transition-colors">
                             <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-adna-accent/20 transition-colors">
                                 <i class="fa-solid fa-phone text-adna-accent text-xs"></i>
                             </div>
                             <span class="text-sm font-semibold text-white group-hover:text-adna-accent transition-colors">514 233-5456</span>
                         </a>
-                        <button id="contact-link" class="contact-link" type="button">Contactez moi</button>
+                        <button id="contact-link" class="contact-link" type="button">
+                            Contactez<br>moi
+                        </button>
                     </div>
                     
                     <div class="h-4 w-px bg-white/20"></div>
