@@ -177,16 +177,17 @@
             opacity: 1;
         }
         .contact-link {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.75);
-            transition: color 200ms ease;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+            transition: color 200ms ease, text-decoration-color 200ms ease;
         }
         .contact-link:hover {
             color: #ffffff;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-            text-decoration-thickness: 1px;
+            text-decoration-color: rgba(255, 255, 255, 0.9);
         }
     </style>
 </head>
@@ -211,7 +212,7 @@
 
                 <!-- Right Actions -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <div class="flex flex-col items-start gap-1">
+                    <div class="flex flex-col items-center gap-1">
                         <a href="tel:514-233-5456" class="flex items-center space-x-2 group rounded-full bg-white/10 px-3 py-1.5 border border-adna-accent/60 shadow-sm shadow-adna-accent/10 hover:bg-adna-accent/15 transition-colors">
                             <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-adna-accent/20 transition-colors">
                                 <i class="fa-solid fa-phone text-adna-accent text-xs"></i>
