@@ -188,6 +188,17 @@
             align-items: center;
             transition: color 200ms ease;
         }
+        .contact-link-line {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.2rem;
+        }
+        .contact-link-icon {
+            font-size: 0.7rem;
+            line-height: 1;
+            color: #ffffff;
+        }
         .contact-link:hover {
             color: #ffffff;
         }
@@ -245,8 +256,11 @@
                             <span class="text-sm font-semibold text-white group-hover:text-adna-accent transition-colors">514 233-5456</span>
                         </a>
                         <button id="contact-link" class="contact-link" type="button">
-                            <span>Contactez</span>
-                            <span>moi</span>
+                            <span class="contact-link-line">
+                                <span class="contact-link-icon" aria-hidden="true">↩︎</span>
+                                <span>Contactez</span>
+                            </span>
+                            <span class="contact-link-line">moi</span>
                         </button>
                     </div>
                     
