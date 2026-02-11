@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests de Filiation - Adnà</title>
+    <meta name="description" content="Découvrez nos tests de filiation ADN: paternité, maternité, fratrie et plus.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Inter + Playfair Display for accents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        adna: {
+                            bg: '#F5F7F3',       /* Clean Off-White */
+                            surface: '#FFFFFF',  /* Pure White */
+                            section: '#F5F6F5',  /* Subtle Grey/Green tint */
+                            anchor: '#5F7A60',   /* Deep Brand Green (Headlines) */
+                            primary: '#94994E',  /* Mid-tone Green */
+                            
+                            /* UPDATED ACCENTS */
+                            accent: '#ffeb19',       /* The requested bright yellow (for backgrounds/graphics) */
+                            'accent-text': '#D4BD00', /* Darker gold/yellow for text readability */
+                            'accent-light': '#FFF599', /* Pastel yellow for soft backgrounds */
+                            'accent-strong': '#F4C000', /* Richer gold for higher-contrast highlights */
+                            'accent-deep': '#9A6B00', /* Deeper gold for emphasis text */
+                            
+                            light: '#DDE2C8',    /* Light Green */
+                            dark: '#374151',     /* Main Text */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(95, 122, 96, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Smooth Anchor Offsets */
+        html {
+            scroll-padding-top: 100px;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-nav {
+            background: rgba(245, 247, 243, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        /* Custom underlining for hover effects */
+        .hover-underline-animation {
+            display: inline-block;
+            position: relative;
+        }
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #ffeb19;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Card Hover Lift */
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #ffeb19; /* Yellow border on hover */
+        }
+
+        /* Step connector line */
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #E5E7EB;
+            z-index: -1;
+        }
+        .step-connector:last-child::after {
+            display: none;
+        }
+
+        /* Slider Animations */
+        .slider-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1000ms ease-in-out;
+            z-index: 10; /* Base Z-index */
+        }
+        .slider-slide.active {
+            opacity: 1;
+            z-index: 20; /* Active slides on top */
+        }
+        
+        /* Scale animation for active slide image */
+        .slider-slide.active img {
+            transform: scale(1.05);
+        }
+        .slider-slide img {
+            transition: transform 6000ms ease-out;
+            transform: scale(1);
+        }
+
+        /* Contact Modal */
+        .contact-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 200ms ease, visibility 200ms ease;
+            z-index: 60;
+        }
+        .contact-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .contact-modal {
+            background: #ffffff;
+            border-radius: 18px;
+            width: min(92vw, 460px);
+            box-shadow: 0 24px 60px -20px rgba(15, 23, 42, 0.4);
+            transform: translateY(8px) scale(0.98);
+            opacity: 0;
+            transition: transform 220ms ease, opacity 220ms ease;
+        }
+        .contact-overlay.is-open .contact-modal {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        .contact-link {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            line-height: 1.05;
+            text-align: center;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            transition: color 200ms ease;
+        }
+        .contact-link-line {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.2rem;
+        }
+        .contact-link-icon {
+            font-size: 0.7rem;
+            line-height: 1;
+            color: #ffffff;
+        }
+        .contact-link:hover {
+            color: #ffffff;
+        }
+        .contact-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            border: 1px solid #e5e7eb;
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            color: #374151;
+            transition: border-color 200ms ease, color 200ms ease, background-color 200ms ease;
+            cursor: pointer;
+        }
+        .contact-option input {
+            accent-color: #ffeb19;
+        }
+        .contact-option.is-active {
+            border-color: #ffeb19;
+            color: #111827;
+            background-color: rgba(255, 235, 25, 0.15);
+        }
+        .contact-field[hidden] {
+            display: none;
+        }
+    </style>
+
+    <style>
+        .btn-theme-primary {
+            background-color: #5F7A60;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-theme-primary:hover {
+            background-color: #4f6750;
+            transform: translateY(-1px);
+        }
+        .btn-theme-dark {
+            background-color: #1f2937;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-theme-dark:hover {
+            background-color: #111827;
+        }
+        .category-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .category-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 30px -18px rgba(17, 24, 39, 0.35);
+            border-color: #ffeb19;
+        }
+        .category-subnav {
+            background: linear-gradient(180deg, #ffffff 0%, #f8faf8 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 14px 25px -22px rgba(17, 24, 39, 0.35);
+        }
+        .category-subnav-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5F7A60;
+            margin-bottom: 0.75rem;
+            padding-left: 0.4rem;
+        }
+        .category-subnav-item {
+            display: block;
+            width: 100%;
+            border-radius: 999px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #374151;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            padding: 0.8rem 1rem;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+        .category-subnav-item:hover {
+            border-color: #DDE2C8;
+            background: #F5F7F3;
+            color: #1f2937;
+        }
+        .category-subnav-item.is-active {
+            border-color: rgba(95, 122, 96, 0.45);
+            background: rgba(221, 226, 200, 0.55);
+            color: #1f2937;
+        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary::after {
+            content: '+';
+            float: right;
+            font-size: 1.5em;
+            font-weight: 300;
+            line-height: 1;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::after { transform: rotate(45deg); }
+    </style>
+</head>
+<body class="bg-adna-bg text-adna-dark antialiased selection:bg-adna-accent selection:text-black">
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 bg-adna-anchor/95 backdrop-blur-md border-b border-white/10 shadow-lg" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center group cursor-pointer">
+                    <img src="ADNA-Logotype-SOLEIL-RGB-01.svg" alt="Adnà" class="h-16 w-auto transition-opacity group-hover:opacity-80">
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-10">
+                    <a href="#test-categories" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Tests</a>
+                    <a href="#how-it-works" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Mode d'emploi</a>
+                    <a href="#commitment" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">À propos</a>
+                    <a href="#journal" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Journal</a>
+                </nav>
+
+                <!-- Right Actions -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="flex items-center gap-2">
+                        <a href="tel:514-233-5456" class="flex items-center space-x-2 group rounded-full bg-white/10 px-3 py-1.5 border border-adna-accent/60 shadow-sm shadow-adna-accent/10 hover:bg-adna-accent/15 transition-colors">
+                            <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-adna-accent/20 transition-colors">
+                                <i class="fa-solid fa-phone text-adna-accent text-xs"></i>
+                            </div>
+                            <span class="text-sm font-semibold text-white group-hover:text-adna-accent transition-colors">514 233-5456</span>
+                        </a>
+                        <button id="contact-link" class="contact-link" type="button">
+                            <span class="contact-link-line">
+                                <span class="contact-link-icon" aria-hidden="true">↪︎</span>
+                            <span>Contactez-</span>
+                            </span>
+                            <span class="contact-link-line">moi</span>
+                        </button>
+                    </div>
+                    
+                    <div class="h-4 w-px bg-white/20"></div>
+
+                    <div class="flex items-center space-x-4">
+                        <span class="text-xs font-bold text-adna-accent cursor-pointer hover:text-white transition-colors">EN</span>
+                        <a href="#" class="text-white hover:text-adna-accent transition-colors relative">
+                            <i class="fa-solid fa-bag-shopping text-lg"></i>
+                            <!-- Updated Accent Color for Notification Dot -->
+                            <span class="absolute -top-1 -right-1 h-2 w-2 bg-adna-accent rounded-full ring-2 ring-adna-anchor"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-adna-accent focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-adna-anchor border-t border-white/10 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#test-categories" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Tests</a>
+                <a href="#how-it-works" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Mode d'emploi</a>
+                <a href="#commitment" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">À propos</a>
+                <a href="#journal" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Journal</a>
+            </div>
+        </div>
+    </header>
+
+        <main class="pt-20">
+        <section class="py-16 bg-adna-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Page Title and Introduction -->
+            <!-- Adjusted spacing for new section rhythm -->
+            <div class="text-center pt-10 sm:pt-14 mb-16 fade-in-section">
+                <h1 class="text-4xl font-bold tracking-tight text-adna-anchor sm:text-5xl">Tests de Filiation</h1>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-700">
+                    Découvrez les liens biologiques qui vous unissent. Nos tests de filiation offrent des réponses claires et précises pour toutes vos questions familiales, avec une fiabilité de 99,9%.
+                </p>
+            </div>
+
+            <!-- Grid of Filiation Tests -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start fade-in-section" id="test-categories">
+                <aside class="lg:col-span-4 xl:col-span-3 lg:sticky lg:top-28">
+                    <div class="category-subnav" aria-label="Navigation des catégories de tests">
+                        <p class="category-subnav-title">Catégories</p>
+                        <ul class="space-y-3">
+                            <li><button class="category-subnav-item is-active" type="button">Test de filiations</button></li>
+                            <li><button class="category-subnav-item" type="button">Santé et bien-être</button></li>
+                            <li><button class="category-subnav-item" type="button">Génétique et biomarqueurs</button></li>
+                            <li><button class="category-subnav-item" type="button">Tests ADN Animaux</button></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="lg:col-span-8 xl:col-span-9">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Paternity Test Card -->
+                <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800">Test de Paternité</h2>
+                            <p class="text-lg font-medium text-gray-700 whitespace-nowrap">dès 199 $</p>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Confirmez le lien biologique entre un père présumé et un enfant avec une certitude scientifique inégalée.
+                        </p>
+                    </div>
+                    <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                <!-- Maternity Test Card -->
+                <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800">Test de Maternité</h2>
+                            <p class="text-lg font-medium text-gray-700 whitespace-nowrap">dès 199 $</p>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Vérifiez le lien biologique entre une mère présumée et un enfant, souvent utilisé dans les cas d'adoption ou de FIV.
+                        </p>
+                    </div>
+                    <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                <!-- Twin Test Card -->
+                <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800">Test de Gémellité</h2>
+                            <p class="text-lg font-medium text-gray-700 whitespace-nowrap">dès 229 $</p>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Déterminez si des jumeaux sont identiques (monozygotes) ou fraternels (dizygotes) avec notre analyse comparative d'ADN.
+                        </p>
+                    </div>
+                    <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                <!-- Sibling Test Card -->
+                <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800">Test de Fraternité</h2>
+                            <p class="text-lg font-medium text-gray-700 whitespace-nowrap">dès 249 $</p>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Établissez la probabilité que deux individus partagent un ou deux parents en commun (frères/sœurs, demi-frères/sœurs).
+                        </p>
+                    </div>
+                    <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                <!-- Grandparent Test Card -->
+                <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800">Test Grands-Parents</h2>
+                            <p class="text-lg font-medium text-gray-700 whitespace-nowrap">dès 249 $</p>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Utilisé lorsque le père présumé n'est pas disponible, ce test détermine un lien de parenté entre un enfant et ses grands-parents paternels.
+                        </p>
+                    </div>
+                    <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                <!-- Aunt/Uncle Test Card -->
+                <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 class="text-xl font-semibold text-gray-800">Test Oncle et Tante</h2>
+                            <p class="text-lg font-medium text-gray-700 whitespace-nowrap">dès 249 $</p>
+                        </div>
+                        <p class="text-gray-700 text-sm mb-4">
+                            Une autre option indirecte pour vérifier la filiation paternelle en comparant l'ADN d'un enfant avec celui du frère ou de la sœur du père.
+                        </p>
+                    </div>
+                    <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- End of max-w-7xl container -->
+
+        <!-- Why Choose Us Section -->
+        <!-- First alternating background section (white) -->
+        <section class="bg-white py-16 sm:py-20 mt-16 sm:mt-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-adna-anchor mb-12">Pourquoi choisir Adnà?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-adna-anchor" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">Précision 99.9%+</h3>
+                        <p class="text-gray-700 text-sm">Analyse de 22 marqueurs génétiques pour des résultats d'une fiabilité maximale.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-adna-anchor" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">Prélèvement Simple</h3>
+                        <p class="text-gray-700 text-sm">Notre kit de prélèvement buccal est rapide, indolore et peut être fait à la maison.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 text-adna-anchor" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">Résultats Rapides</h3>
+                        <p class="text-gray-700 text-sm">Recevez vos résultats confidentiels en ligne en seulement 3 à 5 jours ouvrables.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <!-- Second alternating background section (main bg) -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-adna-anchor mb-12">Comment ça fonctionne</h2>
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto mb-4 bg-white rounded-full shadow-md text-2xl font-bold text-adna-anchor">1</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Commandez</h3>
+                        <p class="text-sm text-gray-700">Choisissez votre test et recevez votre kit à domicile.</p>
+                    </div>
+                    <div class="flex-1 hidden md:block border-t-2 border-dashed border-gray-300"></div>
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto mb-4 bg-white rounded-full shadow-md text-2xl font-bold text-adna-anchor">2</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Prélevez</h3>
+                        <p class="text-sm text-gray-700">Suivez les instructions simples pour recueillir les échantillons.</p>
+                    </div>
+                    <div class="flex-1 hidden md:block border-t-2 border-dashed border-gray-300"></div>
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto mb-4 bg-white rounded-full shadow-md text-2xl font-bold text-adna-anchor">3</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Envoyez</h3>
+                        <p class="text-sm text-gray-700">Retournez les échantillons au laboratoire avec l'enveloppe prépayée.</p>
+                    </div>
+                    <div class="flex-1 hidden md:block border-t-2 border-dashed border-gray-300"></div>
+                    <div class="text-center">
+                        <div class="flex items-center justify-center h-16 w-16 mx-auto mb-4 bg-white rounded-full shadow-md text-2xl font-bold text-adna-anchor">4</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Découvrez</h3>
+                        <p class="text-sm text-gray-700">Accédez à votre rapport détaillé via notre portail sécurisé.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table Section -->
+        <!-- Third alternating background section (white) -->
+        <section class="bg-white py-16 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-adna-anchor mb-12">Comparez nos tests de filiation</h2>
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th scope="col" class="px-3 py-3 font-semibold text-gray-700 uppercase tracking-wider text-xs sm:text-sm">Test</th>
+                                    <th scope="col" class="px-3 py-3 font-semibold text-gray-700 uppercase tracking-wider text-xs sm:text-sm">Participants</th>
+                                    <th scope="col" class="px-3 py-3 font-semibold text-gray-700 uppercase tracking-wider text-xs sm:text-sm">Usage</th>
+                                    <th scope="col" class="px-3 py-3 font-semibold text-gray-700 uppercase tracking-wider text-xs sm:text-sm">Délai*</th>
+                                    <th scope="col" class="px-3 py-3 font-semibold text-gray-700 uppercase tracking-wider text-xs sm:text-sm">Légal</th>
+                                    <th scope="col" class="px-3 py-3 font-semibold text-gray-700 uppercase tracking-wider text-xs sm:text-sm text-right">Prix</th>
+                                    <th scope="col" class="px-3 py-3"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-800">Paternité</td>
+                                    <td class="px-3 py-4 text-gray-700">Enfant + Père présumé</td>
+                                    <td class="px-3 py-4 text-gray-700">Confirmer père biologique</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">3-5 j.</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">Oui</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-800 font-medium text-right">199 $</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-right"><a href="#" class="font-semibold btn-theme-primary rounded-md py-2 px-3 text-xs sm:text-sm">Commander</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-800">Maternité</td>
+                                    <td class="px-3 py-4 text-gray-700">Enfant + Mère présumée</td>
+                                    <td class="px-3 py-4 text-gray-700">Confirmer mère biologique</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">3-5 j.</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">Oui</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-800 font-medium text-right">199 $</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-right"><a href="#" class="font-semibold btn-theme-primary rounded-md py-2 px-3 text-xs sm:text-sm">Commander</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-800">Gémellité</td>
+                                    <td class="px-3 py-4 text-gray-700">2 Jumeaux</td>
+                                    <td class="px-3 py-4 text-gray-700">Jumeaux identiques/fraternels</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">3-5 j.</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">Oui</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-800 font-medium text-right">229 $</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-right"><a href="#" class="font-semibold btn-theme-primary rounded-md py-2 px-3 text-xs sm:text-sm">Commander</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-800">Fraternité</td>
+                                    <td class="px-3 py-4 text-gray-700">2 Frères/Sœurs (+ Mère)</td>
+                                    <td class="px-3 py-4 text-gray-700">Lien de fratrie</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">3-5 j.</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">Oui</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-800 font-medium text-right">249 $</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-right"><a href="#" class="font-semibold btn-theme-primary rounded-md py-2 px-3 text-xs sm:text-sm">Commander</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-800">Grands-Parents</td>
+                                    <td class="px-3 py-4 text-gray-700">Grand(s)-parent(s) + Enfant</td>
+                                    <td class="px-3 py-4 text-gray-700">Lignage paternel/maternel</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">3-5 j.</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">Oui</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-800 font-medium text-right">249 $</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-right"><a href="#" class="font-semibold btn-theme-primary rounded-md py-2 px-3 text-xs sm:text-sm">Commander</a></td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="px-3 py-4 whitespace-nowrap font-medium text-gray-800">Oncle / Tante</td>
+                                    <td class="px-3 py-4 text-gray-700">Oncle/Tante + Enfant</td>
+                                    <td class="px-3 py-4 text-gray-700">Relation si parent absent</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">3-5 j.</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-700">Oui</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-gray-800 font-medium text-right">249 $</td>
+                                    <td class="px-3 py-4 whitespace-nowrap text-right"><a href="#" class="font-semibold btn-theme-primary rounded-md py-2 px-3 text-xs sm:text-sm">Commander</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-4 text-xs text-gray-600 bg-gray-50">
+                        * Les délais sont des estimations pour la structure filaire. Remplacer par les SLA réels du laboratoire.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <!-- Fourth alternating background section (main bg) -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-center text-adna-anchor mb-12">Questions fréquentes</h2>
+                <div class="space-y-4">
+                    <details class="bg-white p-6 rounded-lg shadow-sm">
+                        <summary class="font-semibold text-gray-800 cursor-pointer">Le test peut-il être utilisé à des fins légales?</summary>
+                        <p class="text-gray-700 mt-4 text-sm">Pour qu'un test soit reconnu légalement, le prélèvement des échantillons doit être effectué par un tiers neutre et une chaîne de possession doit être établie. Contactez-nous pour organiser un test à valeur légale.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-lg shadow-sm">
+                        <summary class="font-semibold text-gray-800 cursor-pointer">Quelle est la différence entre un test de paternité et un test de fraternité?</summary>
+                        <p class="text-gray-700 mt-4 text-sm">Un test de paternité compare directement l'ADN d'un enfant à celui du père présumé. Un test de fraternité est utilisé lorsque le père n'est pas disponible; il détermine la probabilité que deux individus soient frères et sœurs en comparant leurs profils ADN.</p>
+                    </details>
+                    <details class="bg-white p-6 rounded-lg shadow-sm">
+                        <summary class="font-semibold text-gray-800 cursor-pointer">La confidentialité de mes résultats est-elle garantie?</summary>
+                        <p class="text-gray-700 mt-4 text-sm">Absolument. Nous prenons votre vie privée très au sérieux. Vos résultats ne sont accessibles que par vous via un portail en ligne sécurisé et ne sont jamais partagés avec des tiers sans votre consentement explicite.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+    
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div class="col-span-2 lg:col-span-1">
+                    <img src="ADNA-Logotype-CONIFERE-RGB-01.svg" alt="Adnà" class="h-14 w-auto">
+                    <p class="text-sm text-gray-500 mt-4 leading-relaxed">
+                        L'expert québécois en tests génétiques à domicile. Fiable, rapide et humain.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-adna-anchor transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-adna-anchor transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-adna-anchor transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">Tests</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Paternité</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Maternité</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Ascendance</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Santé & Bien-être</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">Support</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Centre d'aide</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Suivi de commande</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Mode d'emploi</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">Légal</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Confidentialité</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="hover:text-adna-anchor transition-colors">Politique de cookies</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-4 lg:col-span-1">
+                    <h4 class="font-bold text-gray-900 mb-4">Contact</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-adna-anchor text-xs"></i> (514) 233-5456</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-adna-anchor text-xs"></i> support@adnalacarte.com</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-adna-anchor text-xs"></i> Québec, Canada</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-100 py-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+                <p>&copy; 2025 Adnà. Tous droits réservés.</p>
+                <div class="mt-2 md:mt-0 space-x-4">
+                    <span>Fait avec <i class="fa-solid fa-heart text-red-400"></i> au Québec</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-overlay" class="contact-overlay" aria-hidden="true">
+        <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+            <div class="flex items-start justify-between px-6 pt-6 pb-3">
+                <h2 id="contact-title" class="text-xl font-semibold text-gray-900">Me contacter</h2>
+                <button id="contact-close" class="text-gray-400 hover:text-gray-700 transition-colors" type="button" aria-label="Fermer la fenêtre">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="px-6 pb-6">
+                <p class="text-sm text-gray-600 mb-5">
+                    Choisissez votre méthode de contact et nous vous contacterons dès que possible.
+                </p>
+                <form id="contact-form" class="space-y-4" novalidate>
+                    <fieldset class="space-y-3">
+                        <legend class="text-sm font-medium text-gray-700">Méthode de contact</legend>
+                        <div class="flex flex-wrap gap-3">
+                            <label class="contact-option is-active">
+                                <input type="radio" name="contact-method" value="email" checked>
+                                <span>Courriel</span>
+                            </label>
+                            <label class="contact-option">
+                                <input type="radio" name="contact-method" value="phone">
+                                <span>Téléphone</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <div id="contact-email-field" class="contact-field">
+                        <label for="contact-email" class="text-sm font-medium text-gray-700">Adresse courriel</label>
+                        <input id="contact-email" name="email" type="email" autocomplete="email"
+                               placeholder="ex: nom@domaine.com"
+                               class="mt-2 w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-adna-accent focus:ring-2 focus:ring-adna-accent/20 outline-none">
+                    </div>
+                    <div id="contact-phone-field" class="contact-field" hidden>
+                        <label for="contact-phone" class="text-sm font-medium text-gray-700">Numéro de téléphone</label>
+                        <input id="contact-phone" name="phone" type="tel" autocomplete="tel"
+                               placeholder="ex: 514 555-1234"
+                               class="mt-2 w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-adna-accent focus:ring-2 focus:ring-adna-accent/20 outline-none">
+                    </div>
+                    <p id="contact-error" class="text-xs text-red-600 hidden" role="alert">
+                        Veuillez entrer une adresse courriel valide.
+                    </p>
+                    <div class="flex items-center justify-end gap-3 pt-2">
+                        <button id="contact-cancel" type="button" class="text-sm text-gray-500 hover:text-gray-800 transition-colors">
+                            Annuler
+                        </button>
+                        <button type="submit" class="rounded-full bg-adna-accent px-5 py-2 text-sm font-semibold text-black shadow-sm shadow-adna-accent/30 hover:bg-adna-accent/90 transition-colors">
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // --- Mobile Menu Toggle ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // --- Intersection Observer for Fade In Animations ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- Navbar Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+            } else {
+                nav.classList.remove('shadow-sm');
+            }
+        });
+
+        // --- Contact Modal ---
+        const contactLink = document.getElementById('contact-link');
+        const contactOverlay = document.getElementById('contact-overlay');
+        const contactClose = document.getElementById('contact-close');
+        const contactCancel = document.getElementById('contact-cancel');
+        const contactForm = document.getElementById('contact-form');
+        const contactEmail = document.getElementById('contact-email');
+        const contactPhone = document.getElementById('contact-phone');
+        const contactEmailField = document.getElementById('contact-email-field');
+        const contactPhoneField = document.getElementById('contact-phone-field');
+        const contactError = document.getElementById('contact-error');
+        const contactMethodOptions = document.querySelectorAll('input[name="contact-method"]');
+
+        const openContactModal = () => {
+            contactOverlay.classList.add('is-open');
+            contactOverlay.setAttribute('aria-hidden', 'false');
+            contactEmail.focus();
+        };
+
+        const closeContactModal = () => {
+            contactOverlay.classList.remove('is-open');
+            contactOverlay.setAttribute('aria-hidden', 'true');
+            contactError.classList.add('hidden');
+            contactEmail.setAttribute('aria-invalid', 'false');
+            contactPhone.setAttribute('aria-invalid', 'false');
+            contactForm.reset();
+            setContactMethod('email');
+        };
+
+        const isValidEmail = (value) => {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        };
+
+        const isValidPhone = (value) => {
+            return /^[0-9+()\s.-]{7,}$/.test(value);
+        };
+
+        const setContactMethod = (method) => {
+            contactMethodOptions.forEach(option => {
+                option.checked = option.value === method;
+            });
+            contactEmailField.hidden = method !== 'email';
+            contactPhoneField.hidden = method !== 'phone';
+            document.querySelectorAll('.contact-option').forEach(option => {
+                const input = option.querySelector('input');
+                option.classList.toggle('is-active', input && input.value === method);
+            });
+            if (method === 'email') {
+                contactEmail.focus();
+            } else {
+                contactPhone.focus();
+            }
+            contactError.classList.add('hidden');
+        };
+
+        contactLink.addEventListener('click', openContactModal);
+        contactClose.addEventListener('click', closeContactModal);
+        contactCancel.addEventListener('click', closeContactModal);
+
+        contactMethodOptions.forEach(option => {
+            option.addEventListener('change', (event) => {
+                setContactMethod(event.target.value);
+            });
+        });
+
+        contactOverlay.addEventListener('click', (event) => {
+            if (event.target === contactOverlay) {
+                closeContactModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && contactOverlay.classList.contains('is-open')) {
+                closeContactModal();
+            }
+        });
+
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const selectedMethod = document.querySelector('input[name="contact-method"]:checked')?.value;
+            const emailValue = contactEmail.value.trim();
+            const phoneValue = contactPhone.value.trim();
+
+            if (selectedMethod === 'phone') {
+                contactError.textContent = 'Veuillez entrer un numéro de téléphone valide.';
+                if (!isValidPhone(phoneValue)) {
+                    contactError.classList.remove('hidden');
+                    contactPhone.setAttribute('aria-invalid', 'true');
+                    contactPhone.focus();
+                    return;
+                }
+            } else {
+                contactError.textContent = 'Veuillez entrer une adresse courriel valide.';
+                if (!isValidEmail(emailValue)) {
+                    contactError.classList.remove('hidden');
+                    contactEmail.setAttribute('aria-invalid', 'true');
+                    contactEmail.focus();
+                    return;
+                }
+            }
+
+            contactError.classList.add('hidden');
+            contactEmail.setAttribute('aria-invalid', 'false');
+            contactPhone.setAttribute('aria-invalid', 'false');
+            closeContactModal();
+        });
+
+        // --- Custom Image Slider Logic (Robust Version) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slider-slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const nextBtn = document.getElementById('slider-next');
+            const prevBtn = document.getElementById('slider-prev');
+            const sliderContainer = document.getElementById('hero-slider');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            let slideInterval = null;
+            const INTERVAL_TIME = 6000; // 6 seconds
+
+            // Trigger the initial animation by removing the inline style constraint
+            setTimeout(() => {
+                const firstSlideImg = document.querySelector('.slider-slide[data-index="0"] img');
+                if (firstSlideImg) {
+                    firstSlideImg.style.transform = ''; // Removes inline scale(1), CSS takes over with transition
+                }
+            }, 50);
+
+            // Function to update slide classes
+            const updateSlides = (index) => {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-white/50');
+                        dot.classList.add('bg-white', 'scale-125');
+                    } else {
+                        dot.classList.remove('bg-white', 'scale-125');
+                        dot.classList.add('bg-white/50');
+                    }
+                });
+            };
+
+            // Start Timer (Clear existing first to be safe)
+            const resetTimer = () => {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+                slideInterval = setInterval(nextSlide, INTERVAL_TIME);
+            };
+
+            // Stop Timer
+            const stopTimer = () => {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
+            };
+
+            // Next Slide Function
+            const nextSlide = () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlides(currentSlide);
+            };
+
+            // Previous Slide Function
+            const prevSlide = () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlides(currentSlide);
+            };
+
+            if (!totalSlides || !nextBtn || !prevBtn || !sliderContainer) {
+                return;
+            }
+
+            // Initial State
+            updateSlides(currentSlide);
+            resetTimer();
+
+            // Event Listeners for Controls
+            
+            nextBtn.addEventListener('click', () => {
+                stopTimer();
+                nextSlide();
+                resetTimer();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                stopTimer();
+                prevSlide();
+                resetTimer();
+            });
+
+            // Dot Navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    stopTimer();
+                    const index = parseInt(e.target.getAttribute('data-slide'));
+                    currentSlide = index;
+                    updateSlides(currentSlide);
+                    resetTimer();
+                });
+            });
+
+            // Pause on Hover
+            sliderContainer.addEventListener('mouseenter', stopTimer);
+            
+            // Resume on Leave
+            sliderContainer.addEventListener('mouseleave', resetTimer);
+        });
+    </script>
+</body>
+</html>
