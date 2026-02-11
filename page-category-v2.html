@@ -254,31 +254,43 @@
             border-color: #ffeb19;
         }
         .category-subnav {
-            background: #13a8de;
-            border-radius: 1.25rem;
-            padding: 1.25rem;
-            box-shadow: 0 15px 30px -22px rgba(17, 24, 39, 0.5);
+            background: linear-gradient(180deg, #ffffff 0%, #f8faf8 100%);
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 14px 25px -22px rgba(17, 24, 39, 0.35);
         }
-        .category-subnav-link {
+        .category-subnav-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5F7A60;
+            margin-bottom: 0.75rem;
+            padding-left: 0.4rem;
+        }
+        .category-subnav-item {
             display: block;
             width: 100%;
             border-radius: 999px;
-            background: #f3f4f6;
-            color: #111827;
-            text-align: center;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            color: #374151;
+            text-align: left;
             font-weight: 600;
             letter-spacing: 0.01em;
-            padding: 0.9rem 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            padding: 0.8rem 1rem;
+            transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
         }
-        .category-subnav-link:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 16px -14px rgba(17, 24, 39, 0.55);
-            background: #ffffff;
+        .category-subnav-item:hover {
+            border-color: #DDE2C8;
+            background: #F5F7F3;
+            color: #1f2937;
         }
-        .category-subnav-link.is-active {
-            background: #a3cd5f;
-            color: #ffffff;
+        .category-subnav-item.is-active {
+            border-color: rgba(95, 122, 96, 0.45);
+            background: rgba(221, 226, 200, 0.55);
+            color: #1f2937;
         }
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
@@ -378,18 +390,19 @@
             <!-- Grid of Filiation Tests -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start fade-in-section" id="test-categories">
                 <aside class="lg:col-span-4 xl:col-span-3 lg:sticky lg:top-28">
-                    <nav class="category-subnav" aria-label="Sous-navigation des catégories de tests">
+                    <div class="category-subnav" aria-label="Navigation des catégories de tests">
+                        <p class="category-subnav-title">Catégories</p>
                         <ul class="space-y-3">
-                            <li><a href="#filiation-tests" class="category-subnav-link is-active">Test de filiations</a></li>
-                            <li><a href="#sante-bien-etre" class="category-subnav-link">Santé et bien-être</a></li>
-                            <li><a href="#genetique-biomarqueurs" class="category-subnav-link">Génétique et biomarqueurs</a></li>
-                            <li><a href="#tests-adn-animaux" class="category-subnav-link">Tests ADN Animaux</a></li>
+                            <li><button class="category-subnav-item is-active" type="button">Test de filiations</button></li>
+                            <li><button class="category-subnav-item" type="button">Santé et bien-être</button></li>
+                            <li><button class="category-subnav-item" type="button">Génétique et biomarqueurs</button></li>
+                            <li><button class="category-subnav-item" type="button">Tests ADN Animaux</button></li>
                         </ul>
-                    </nav>
+                    </div>
                 </aside>
 
                 <div class="lg:col-span-8 xl:col-span-9">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="filiation-tests">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Paternity Test Card -->
                 <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
                     <div class="flex-grow">
@@ -468,43 +481,6 @@
                     </div>
                     <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
                 </div>
-                    </div>
-
-                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="sante-bien-etre">
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Santé cardiovasculaire</h3>
-                            <p class="text-sm text-gray-600">Évaluez vos prédispositions génétiques liées au cœur et au métabolisme.</p>
-                        </article>
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Nutrition personnalisée</h3>
-                            <p class="text-sm text-gray-600">Adaptez vos habitudes alimentaires selon votre profil ADN.</p>
-                        </article>
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Récupération et sommeil</h3>
-                            <p class="text-sm text-gray-600">Comprenez vos besoins de récupération et votre sensibilité au stress.</p>
-                        </article>
-                    </div>
-
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="genetique-biomarqueurs">
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Génétique du métabolisme</h3>
-                            <p class="text-sm text-gray-600">Analyse des variants impliqués dans l'absorption et l'utilisation des nutriments.</p>
-                        </article>
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Biomarqueurs inflammatoires</h3>
-                            <p class="text-sm text-gray-600">Identifiez des tendances biologiques associées à l'inflammation chronique.</p>
-                        </article>
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Performance et énergie</h3>
-                            <p class="text-sm text-gray-600">Explorez des marqueurs liés à la vitalité, l'effort et la récupération physique.</p>
-                        </article>
-                    </div>
-
-                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="tests-adn-animaux">
-                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5 sm:col-span-2 lg:col-span-3">
-                            <h3 class="text-base font-semibold text-gray-900 mb-1">Tests ADN Animaux (à venir)</h3>
-                            <p class="text-sm text-gray-600">Bientôt disponibles : filiation, race et dépistage de prédispositions pour chiens, chats et autres animaux de compagnie.</p>
-                        </article>
                     </div>
                 </div>
             </div>
