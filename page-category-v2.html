@@ -253,6 +253,33 @@
             box-shadow: 0 18px 30px -18px rgba(17, 24, 39, 0.35);
             border-color: #ffeb19;
         }
+        .category-subnav {
+            background: #13a8de;
+            border-radius: 1.25rem;
+            padding: 1.25rem;
+            box-shadow: 0 15px 30px -22px rgba(17, 24, 39, 0.5);
+        }
+        .category-subnav-link {
+            display: block;
+            width: 100%;
+            border-radius: 999px;
+            background: #f3f4f6;
+            color: #111827;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            padding: 0.9rem 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .category-subnav-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 16px -14px rgba(17, 24, 39, 0.55);
+            background: #ffffff;
+        }
+        .category-subnav-link.is-active {
+            background: #a3cd5f;
+            color: #ffffff;
+        }
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         details > summary::after {
@@ -279,7 +306,7 @@
 
                 <!-- Desktop Menu -->
                 <nav class="hidden md:flex space-x-10">
-                    <a href="#popular-tests" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Tests</a>
+                    <a href="#test-categories" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Tests</a>
                     <a href="#how-it-works" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Mode d'emploi</a>
                     <a href="#commitment" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">À propos</a>
                     <a href="#journal" class="text-sm font-medium text-white/90 hover:text-adna-accent transition-colors hover-underline-animation">Journal</a>
@@ -327,7 +354,7 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-adna-anchor border-t border-white/10 absolute w-full shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#popular-tests" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Tests</a>
+                <a href="#test-categories" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Tests</a>
                 <a href="#how-it-works" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Mode d'emploi</a>
                 <a href="#commitment" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">À propos</a>
                 <a href="#journal" class="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-adna-accent">Journal</a>
@@ -349,7 +376,20 @@
             </div>
 
             <!-- Grid of Filiation Tests -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in-section">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start fade-in-section" id="test-categories">
+                <aside class="lg:col-span-4 xl:col-span-3 lg:sticky lg:top-28">
+                    <nav class="category-subnav" aria-label="Sous-navigation des catégories de tests">
+                        <ul class="space-y-3">
+                            <li><a href="#filiation-tests" class="category-subnav-link is-active">Test de filiations</a></li>
+                            <li><a href="#sante-bien-etre" class="category-subnav-link">Santé et bien-être</a></li>
+                            <li><a href="#genetique-biomarqueurs" class="category-subnav-link">Génétique et biomarqueurs</a></li>
+                            <li><a href="#tests-adn-animaux" class="category-subnav-link">Tests ADN Animaux</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <div class="lg:col-span-8 xl:col-span-9">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="filiation-tests">
                 <!-- Paternity Test Card -->
                 <div class="category-card bg-white border border-gray-100 rounded-lg p-6 flex flex-col">
                     <div class="flex-grow">
@@ -427,6 +467,45 @@
                         </p>
                     </div>
                     <a href="#" class="w-full text-center py-2 px-4 rounded-md font-semibold btn-theme-primary mt-4">Commander</a>
+                </div>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="sante-bien-etre">
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Santé cardiovasculaire</h3>
+                            <p class="text-sm text-gray-600">Évaluez vos prédispositions génétiques liées au cœur et au métabolisme.</p>
+                        </article>
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Nutrition personnalisée</h3>
+                            <p class="text-sm text-gray-600">Adaptez vos habitudes alimentaires selon votre profil ADN.</p>
+                        </article>
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Récupération et sommeil</h3>
+                            <p class="text-sm text-gray-600">Comprenez vos besoins de récupération et votre sensibilité au stress.</p>
+                        </article>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="genetique-biomarqueurs">
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Génétique du métabolisme</h3>
+                            <p class="text-sm text-gray-600">Analyse des variants impliqués dans l'absorption et l'utilisation des nutriments.</p>
+                        </article>
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Biomarqueurs inflammatoires</h3>
+                            <p class="text-sm text-gray-600">Identifiez des tendances biologiques associées à l'inflammation chronique.</p>
+                        </article>
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Performance et énergie</h3>
+                            <p class="text-sm text-gray-600">Explorez des marqueurs liés à la vitalité, l'effort et la récupération physique.</p>
+                        </article>
+                    </div>
+
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="tests-adn-animaux">
+                        <article class="category-card bg-white border border-gray-100 rounded-lg p-5 sm:col-span-2 lg:col-span-3">
+                            <h3 class="text-base font-semibold text-gray-900 mb-1">Tests ADN Animaux (à venir)</h3>
+                            <p class="text-sm text-gray-600">Bientôt disponibles : filiation, race et dépistage de prédispositions pour chiens, chats et autres animaux de compagnie.</p>
+                        </article>
+                    </div>
                 </div>
             </div>
 
